@@ -12,3 +12,6 @@ func _init(p_name = "MONTH", p_abbr = "Abbreviation", p_max = 30, p_ord = 0):
 	name = p_name
 	abbr = p_abbr
 	ordinal = p_ord
+
+func _to_string() -> String:
+	return name

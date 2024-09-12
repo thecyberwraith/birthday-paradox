@@ -2,7 +2,7 @@
 
 This is a toy project developed for a math department homecoming table. The goals of this project are:
 
-- [ ] Add days of the year.
+- [x] Add days of the year.
 - [ ] Visualize the frequencies of entered days
 - [ ] Store the list of entered days
 - [ ] Have fancy colors in visualization

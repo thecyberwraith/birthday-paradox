@@ -15,6 +15,8 @@ var MONTHS: Array[Month] = [
 	Month.new("December", "DEC", 31, 12)
 ]
 
+var days: Array[Day] = []
+
 @onready var month_option: OptionButton = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/MonthInput
 @onready var day_option: SpinBox = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/DayInput
 @onready var add_button: Button = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/AddNewDayButton
@@ -34,4 +36,5 @@ func _month_selected(idx: int):
 
 func _day_added():
 	var day = Day.new(MONTHS[month_option.selected], int(day_option.value))
-	print("The day is %s %s" % [day.month.name, day.day])
+	days.append(day)
+	print(days)

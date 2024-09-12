@@ -14,3 +14,6 @@ class_name Day
 func _init(p_month=Month.new("January", "JAN", 31, 1), p_day=1):
 	month = p_month
 	day = p_day
+
+func _to_string() -> String:
+	return "%s %s" % [month.name, day]
