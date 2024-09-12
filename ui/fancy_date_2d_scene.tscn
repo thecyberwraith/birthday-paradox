@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dto5552utxr65"]
+
+[ext_resource type="Texture2D" uid="uid://deqxqmd3k36x8" path="res://images/circle.png" id="1_qanfj"]
+
+[node name="FancyDate2DScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qanfj")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dve2x8ggntrwi"]
+
+[ext_resource type="PackedScene" uid="uid://dto5552utxr65" path="res://ui/fancy_date_2d_scene.tscn" id="1_ynoq6"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="FancyDate2DScene" parent="SubViewport" instance=ExtResource("1_ynoq6")]
