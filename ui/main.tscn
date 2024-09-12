@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bebmap5opiy7l"]
+[gd_scene load_steps=4 format=3 uid="uid://bebmap5opiy7l"]
 
 [ext_resource type="PackedScene" uid="uid://dve2x8ggntrwi" path="res://ui/fancy_date_display.tscn" id="1_18po4"]
 [ext_resource type="Script" path="res://ui/main.gd" id="1_jydcc"]
+[ext_resource type="PackedScene" uid="uid://3prplegus4v2" path="res://ui/frequency_table.tscn" id="2_etiki"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -60,10 +61,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="FrequencyTable" parent="PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/ScrollContainer" instance=ExtResource("2_etiki")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="SubViewportContainer" parent="PanelContainer/HSplitContainer" instance=ExtResource("1_18po4")]
 layout_mode = 2

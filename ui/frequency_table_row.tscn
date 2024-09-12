@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ny24d06y8fp"]
+
+[ext_resource type="Script" path="res://ui/frequency_row.gd" id="1_vr2ro"]
+
+[node name="Container" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vr2ro")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
