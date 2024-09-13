@@ -2,10 +2,10 @@ extends Resource
 
 class_name Month
 
-@export var max_days: int
-@export var name: String
-@export var abbr: String
-@export var ordinal: int
+var max_days: int
+var name: String
+var abbr: String
+var ordinal: int
 
 func _init(p_name = "MONTH", p_abbr = "Abbreviation", p_max = 30, p_ord = 0):
 	max_days = p_max

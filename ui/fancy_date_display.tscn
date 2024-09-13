@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dve2x8ggntrwi"]
+[gd_scene load_steps=3 format=3 uid="uid://dve2x8ggntrwi"]
 
+[ext_resource type="Script" path="res://ui/fancy_date_display.gd" id="1_iaato"]
 [ext_resource type="PackedScene" uid="uid://dto5552utxr65" path="res://ui/fancy_date_2d_scene.tscn" id="1_ynoq6"]
 
-[node name="SubViewportContainer" type="SubViewportContainer"]
+[node name="FancyDateDisplay" type="SubViewportContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 stretch = true
+script = ExtResource("1_iaato")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true

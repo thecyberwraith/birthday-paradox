@@ -64,5 +64,5 @@ size_flags_vertical = 3
 [node name="FrequencyTable" parent="PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/ScrollContainer" instance=ExtResource("2_etiki")]
 layout_mode = 2
 
-[node name="SubViewportContainer" parent="PanelContainer/HSplitContainer" instance=ExtResource("1_18po4")]
+[node name="FancyDateDisplay" parent="PanelContainer/HSplitContainer" instance=ExtResource("1_18po4")]
 layout_mode = 2

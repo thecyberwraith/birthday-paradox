@@ -1,10 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dto5552utxr65"]
+[gd_scene load_steps=3 format=3 uid="uid://dto5552utxr65"]
 
+[ext_resource type="Script" path="res://ui/fancy_date_2d_scene.gd" id="1_0wbq4"]
 [ext_resource type="Texture2D" uid="uid://deqxqmd3k36x8" path="res://images/circle.png" id="1_qanfj"]
 
 [node name="FancyDate2DScene" type="Node2D"]
+script = ExtResource("1_0wbq4")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Days" type="Node2D" parent="."]
+modulate = Color(1, 0.688537, 0.98802, 1)
+
+[node name="CenterCircle" type="Sprite2D" parent="."]
 texture = ExtResource("1_qanfj")
-
-[node name="Camera2D" type="Camera2D" parent="Sprite2D"]

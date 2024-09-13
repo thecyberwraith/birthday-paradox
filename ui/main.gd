@@ -1,20 +1,5 @@
 extends Control
 
-var MONTHS: Array[Month] = [
-	Month.new("January", "JAN", 31, 1),
-	Month.new("February", "FEB", 29, 2),
-	Month.new("March", "MAR", 31, 3),
-	Month.new("April", "APR", 30, 4),
-	Month.new("May", "MAY", 31, 5),
-	Month.new("June", "JUN", 30, 6),
-	Month.new("July", "JUL", 31, 7),
-	Month.new("August", "AUG", 31, 8),
-	Month.new("September", "SEP", 30, 9),
-	Month.new("October", "OCT", 31, 10),
-	Month.new("November", "NOV", 30, 11),
-	Month.new("December", "DEC", 31, 12)
-]
-
 var days: Array[Day] = []
 
 @onready var month_option: OptionButton = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/MonthInput
@@ -22,22 +7,23 @@ var days: Array[Day] = []
 @onready var add_button: Button = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/AddNewDayButton
 
 @onready var frequencyTable: FrequencyTable = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/ScrollContainer/FrequencyTable
+@onready var fancyDisplay: FancyDateDisplay = $PanelContainer/HSplitContainer/FancyDateDisplay
 
 func _ready() -> void:
 	month_option.connect("item_selected", _month_selected)
 	add_button.connect("pressed", _day_added)
 	
-	for i in MONTHS.size():
-		month_option.add_item(MONTHS[i].name, i)
+	for i in CALENDAR.Months.size():
+		month_option.add_item(CALENDAR.Months[i].name, i)
 
 	month_option.select(0)
 	_month_selected(0)
 
 func _month_selected(idx: int) -> void:
-	day_option.max_value = MONTHS[idx].max_days
+	day_option.max_value = CALENDAR.Months[idx].max_days
 
 func _day_added() -> void:
-	var day = Day.new(MONTHS[month_option.selected], int(day_option.value))
+	var day = Day.new(CALENDAR.Months[month_option.selected], int(day_option.value))
 	days.append(day)
 	
 	frequencyTable.populate_data(days)
