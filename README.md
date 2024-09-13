@@ -4,7 +4,7 @@ This is a toy project developed for a math department homecoming table. The goal
 
 - [x] Add days of the year.
 - [x] Visualize the frequencies of entered days
-- [ ] Store the list of entered days
+- [x] Store the list of entered days
 - [ ] Have fancy colors in visualization
 - [ ] Have latent following of visualization
 - [ ] Display interesting statistics for data compared to theoretical
