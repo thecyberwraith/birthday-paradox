@@ -14,3 +14,19 @@ var Months: Array[Month] = [
 	Month.new("November", "NOV", 30, 11),
 	Month.new("December", "DEC", 31, 12)
 ]
+
+var DAYS_IN_YEAR: int = 366
+
+## Takes a day from the standard calendar and returns the ratio
+## of its ordinal (count from Jan 1) to the end of the year (366 days).
+func day_to_float(day: Day) -> float:
+	var days: int = 0
+	for month in Months:
+		if day.month == month:
+			break
+		
+		days += month.max_days
+	
+	var value: float = (days + day.day - 1.0) / DAYS_IN_YEAR
+
+	return value

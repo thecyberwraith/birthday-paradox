@@ -13,4 +13,4 @@ func _ready() -> void:
 	connect("resized", set_radius)
 
 func populate_days(days, counts) -> void:
-	pass
+	dateScene.populate_day_rays(days, counts)

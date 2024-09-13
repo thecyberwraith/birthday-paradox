@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dto5552utxr65"]
+[gd_scene load_steps=4 format=3 uid="uid://dto5552utxr65"]
 
 [ext_resource type="Script" path="res://ui/fancy_date_2d_scene.gd" id="1_0wbq4"]
 [ext_resource type="Texture2D" uid="uid://deqxqmd3k36x8" path="res://images/circle.png" id="1_qanfj"]
 
+[sub_resource type="Gradient" id="Gradient_ecusg"]
+offsets = PackedFloat32Array(0, 0.247126, 0.517241, 0.770115, 1)
+colors = PackedColorArray(7.70092e-07, 0.526338, 0.755548, 1, 0.0959535, 0.519249, 0.165317, 1, 1, 0.212816, 0.158403, 1, 0.913725, 0.560784, 0, 1, 0, 0.52549, 0.756863, 1)
+
 [node name="FancyDate2DScene" type="Node2D"]
 script = ExtResource("1_0wbq4")
+day_gradient = SubResource("Gradient_ecusg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Days" type="Node2D" parent="."]
-modulate = Color(1, 0.688537, 0.98802, 1)
 
 [node name="CenterCircle" type="Sprite2D" parent="."]
 texture = ExtResource("1_qanfj")
