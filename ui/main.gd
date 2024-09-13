@@ -34,4 +34,29 @@ func _day_added() -> void:
 	var day = Day.new(CALENDAR.Months[month_option.selected], int(day_option.value))
 	days.append(day)
 	
-	new_day_set_found.emit(days)
+	var results = _create_day_decomposition()
+	
+	new_day_set_found.emit(results[0], results[1])
+	
+## Returns the unique days in an array, and a dictionary from days to counts.
+## The unique days are ordered from most frequent to least.
+func _create_day_decomposition():
+	var day_counts: Dictionary = Dictionary()
+	var ordered_days: Array[Day] = []
+	
+	for day in days:
+		var key = day._to_string()
+		
+		if not key in day_counts:
+			day_counts[key] = 0
+			ordered_days.append(day)
+		
+		day_counts[key] += 1
+	
+	ordered_days.sort_custom(func freqSort(x,y):
+		if day_counts[x.to_string()] > day_counts[y._to_string()]:
+			return true
+		return false
+		)
+	
+	return [ordered_days, day_counts]

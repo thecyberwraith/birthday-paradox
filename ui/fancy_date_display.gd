@@ -12,5 +12,5 @@ func _ready() -> void:
 	
 	connect("resized", set_radius)
 
-func populate_days(days: Array[Day]) -> void:
+func populate_days(days, counts) -> void:
 	pass

@@ -31,5 +31,9 @@ func _on_radius_changed() -> void:
 
 		days.add_child(ray)
 
+## Takes an iterable of days and produces a ray for each.
+func populate_day_rays(new_days, counts):
+	print("Here come the days.")
+
 func _ready() -> void:
 	_on_radius_changed()
