@@ -4,7 +4,7 @@ class_name FrequencyTable
 
 const freqRowTemplate = preload("res://ui/frequency_table_row.tscn")
 
-func populate_data(data: Array[Day]) -> void:
+func populate_days(data: Array[Day]) -> void:
 	var day_counts: Dictionary = Dictionary()
 	var ordered_days: Array[Day] = []
 	

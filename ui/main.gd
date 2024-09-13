@@ -9,9 +9,17 @@ var days: Array[Day] = []
 @onready var frequencyTable: FrequencyTable = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/ScrollContainer/FrequencyTable
 @onready var fancyDisplay: FancyDateDisplay = $PanelContainer/HSplitContainer/FancyDateDisplay
 
+signal new_day_set_found
+signal new_day_added
+
 func _ready() -> void:
-	month_option.connect("item_selected", _month_selected)
-	add_button.connect("pressed", _day_added)
+	month_option.item_selected.connect(_month_selected)
+	add_button.pressed.connect(_day_added)
+	
+	var consumers = [frequencyTable, fancyDisplay]
+	
+	for consumer in consumers:
+		new_day_set_found.connect(consumer.populate_days)
 	
 	for i in CALENDAR.Months.size():
 		month_option.add_item(CALENDAR.Months[i].name, i)
@@ -26,4 +34,4 @@ func _day_added() -> void:
 	var day = Day.new(CALENDAR.Months[month_option.selected], int(day_option.value))
 	days.append(day)
 	
-	frequencyTable.populate_data(days)
+	new_day_set_found.emit(days)
