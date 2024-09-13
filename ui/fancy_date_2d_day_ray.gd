@@ -9,35 +9,42 @@ class_name FancyDateDayRay
 		segments = value
 		_reset_vertices()
 
-## Sets the overall height of the ray. Must be larger than the width.
-@export_range(0,512,1,"or_greater") var height: int = 40 :
+## Sets the overall length of the ray. Must be larger than the thickness.
+@export_range(0,512,1,"or_greater") var length: int = 40 :
 	set(value):
-		if value < width:
-			height = width
-		height = value
+		if value < thick:
+			length = thick
+		length = value
 		_reset_vertices()
 
-## Sets the thickness of the ray. Must be smaller than the height.
-@export_range(0,512,1,"or_greater") var width: int = 5 :
+## Sets the thickness of the ray. Must be smaller than the length.
+@export_range(0,512,1,"or_greater") var thick: int = 5 :
 	set(value):
-		if value > height:
-			value = height
-		width = value
+		if value > length:
+			value = length
+		thick = value
 		_reset_vertices()
+
+func _init(p_segs=5, p_thick=5, p_length=10):
+	segments = p_segs
+	thick = p_thick
+	length = p_length
 
 func _reset_vertices():
 	var vertices: Array[Vector2] = []
-	var half = segments / 2
-	var radius = width / 2
-	var base_offset = Vector2.UP * radius
+	var radius = thick / 2.0
+	var base_offset = Vector2.RIGHT * radius
 	
 	for i in segments:
-		var angle: float = i*PI/(segments-1)
+		var angle: float = i*PI/(segments-1) + (PI/2)
 		vertices.append(base_offset + Vector2.from_angle(angle)*radius)
 	
-	base_offset += Vector2.UP * (height - width)
+	base_offset += Vector2.RIGHT * (length - thick)
 	for i in segments:
-		var angle: float = i*PI/(segments-1) + PI
+		var angle: float = i*PI/(segments-1) + (3*PI/2)
 		vertices.append(base_offset + Vector2.from_angle(angle)*radius)
-	
+		
 	polygon = vertices
+
+func _ready():
+	_reset_vertices()
