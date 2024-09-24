@@ -37,6 +37,7 @@ func _day_added() -> void:
 	var results = _create_day_decomposition()
 	
 	new_day_set_found.emit(results[0], results[1])
+	new_day_added.emit(day)
 	
 ## Returns the unique days in an array, and a dictionary from days to counts.
 ## The unique days are ordered from most frequent to least.
