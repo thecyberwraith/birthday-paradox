@@ -17,16 +17,17 @@ var Months: Array[Month] = [
 
 var DAYS_IN_YEAR: int = 366
 
-## Takes a day from the standard calendar and returns the ratio
-## of its ordinal (count from Jan 1) to the end of the year (366 days).
-func day_to_float(day: Day) -> float:
+## Takes a day from the standard calendar and returns the
+## ordinal (count from Jan 1) to the end of the year (366 days).
+func day_to_ordinal(day: Day) -> int:
 	var days: int = 0
 	for month in Months:
 		if day.month == month:
 			break
 		
 		days += month.max_days
-	
-	var value: float = (days + day.day - 1.0) / DAYS_IN_YEAR
 
-	return value
+	return days + day.day
+
+func day_to_float(day: Day) -> float:
+	return (day_to_ordinal(day) - 1.0) / DAYS_IN_YEAR
