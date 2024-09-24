@@ -5,12 +5,12 @@ class_name FancyDateDisplay
 @onready var dateScene: FancyDate2DScene = $SubViewport/FancyDate2DScene
 
 func _ready() -> void:
-	var set_radius: Callable = func ():
-		dateScene.radius = min(size.x, size.y) / 2.0
+	var set_diameter: Callable = func ():
+		dateScene.on_diameter_change(min(size.x, size.y))
 	
-	set_radius.call()
+	set_diameter.call()
 	
-	connect("resized", set_radius)
+	connect("resized", set_diameter)
 
 func populate_days(days, counts) -> void:
 	dateScene.populate_day_rays(days, counts)

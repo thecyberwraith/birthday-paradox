@@ -3,48 +3,39 @@ extends Polygon2D
 
 class_name FancyDateDayRay
 
-## The number of vertices per hemisphere.
-@export_range(2,100,1,"or_greater") var segments: int = 10 :
+## The angle spread for the ray.
+@export_range(0.0001, PI) var angle: float = PI/16
+
+@export_range(0,512,1,"or_greater") var inner_radius: float = 40 :
 	set(value):
-		segments = value
+		#if value > outer_radius:
+		#	value = outer_radius
+		inner_radius = value
 		_reset_vertices()
 
-## Sets the overall length of the ray. Must be larger than the thickness.
-@export_range(0,512,1,"or_greater") var length: int = 40 :
+@export_range(0,512,1,"or_greater") var outer_radius: float = 100 :
 	set(value):
-		if value < thick:
-			length = thick
-		length = value
+		#if value < inner_radius:
+		#	value = inner_radius
+		outer_radius = value
 		_reset_vertices()
 
-## Sets the thickness of the ray. Must be smaller than the length.
-@export_range(0,512,1,"or_greater") var thick: int = 5 :
-	set(value):
-		if value > length:
-			value = length
-		thick = value
-		_reset_vertices()
-
-func _init(p_segs=5, p_thick=5, p_length=10):
-	segments = p_segs
-	thick = p_thick
-	length = p_length
+func _init(p_angle: float =5, p_inner_radius: float =5, p_outer_radius: float=10):
+	angle = p_angle
+	inner_radius = p_inner_radius
+	outer_radius = p_outer_radius
+	_reset_vertices()
 
 func _reset_vertices():
-	var vertices: Array[Vector2] = []
-	var radius = thick / 2.0
-	var base_offset = Vector2.RIGHT * radius
+	var ray: Vector2 = Vector2.from_angle(angle / 2)
+	var flip: Vector2 = ray.reflect(Vector2.RIGHT)
 	
-	for i in segments:
-		var angle: float = i*PI/(segments-1) + (PI/2)
-		vertices.append(base_offset + Vector2.from_angle(angle)*radius)
-	
-	base_offset += Vector2.RIGHT * (length - thick)
-	for i in segments:
-		var angle: float = i*PI/(segments-1) + (3*PI/2)
-		vertices.append(base_offset + Vector2.from_angle(angle)*radius)
-		
-	polygon = vertices
+	polygon = [
+		ray * inner_radius,
+		ray * outer_radius,
+		flip * outer_radius,
+		flip * inner_radius
+	]
 
 func _ready():
 	_reset_vertices()
