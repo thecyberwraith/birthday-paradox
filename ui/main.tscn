@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bebmap5opiy7l"]
 
-[ext_resource type="PackedScene" uid="uid://dve2x8ggntrwi" path="res://ui/fancy_date_display.tscn" id="1_18po4"]
+[ext_resource type="PackedScene" uid="uid://dve2x8ggntrwi" path="res://ui/radialCalendar/RadialCalendar.tscn" id="1_18po4"]
 [ext_resource type="Script" path="res://ui/main.gd" id="1_jydcc"]
-[ext_resource type="PackedScene" uid="uid://3prplegus4v2" path="res://ui/frequency_table.tscn" id="2_etiki"]
+[ext_resource type="PackedScene" uid="uid://3prplegus4v2" path="res://ui/frequencyTable/FrequencyTable.tscn" id="2_etiki"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

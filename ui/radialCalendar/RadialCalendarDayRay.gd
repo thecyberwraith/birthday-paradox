@@ -1,7 +1,7 @@
 @tool
 extends Polygon2D
 
-class_name FancyDateDayRay
+class_name RadialCalendarDayRay
 
 ## The angle spread for the ray.
 @export_range(0.0001, PI) var angle: float = PI/16

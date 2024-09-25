@@ -36,7 +36,7 @@ func populate_day_rays(new_days: Array[Day], counts):
 		
 	for day in new_days:
 		var length = 1.0 * counts[day._to_string()] / max_frequency * RAY_LENGTH_MAX
-		var ray: FancyDateDayRay = FancyDateDayRay.new(ANGLE, RAY_LENGTH_MIN, length)
+		var ray: RadialCalendarDayRay = RadialCalendarDayRay.new(ANGLE, RAY_LENGTH_MIN, length)
 		ray.color = day_gradient.sample(CALENDAR.day_to_float(day))
 		var angle = 2*PI*CALENDAR.day_to_float(day)
 		ray.rotate(angle)

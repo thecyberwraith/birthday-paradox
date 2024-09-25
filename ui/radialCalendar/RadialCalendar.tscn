@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dve2x8ggntrwi"]
 
-[ext_resource type="Script" path="res://ui/fancy_date_display.gd" id="1_iaato"]
-[ext_resource type="PackedScene" uid="uid://dto5552utxr65" path="res://ui/fancy_date_2d_scene.tscn" id="1_ynoq6"]
+[ext_resource type="Script" path="res://ui/radialCalendar/RadialCalendar.gd" id="1_wk8g0"]
+[ext_resource type="PackedScene" uid="uid://dto5552utxr65" path="res://ui/radialCalendar/RadialCalendarScene.tscn" id="2_3yf28"]
 
 [node name="FancyDateDisplay" type="SubViewportContainer"]
 anchors_preset = 15
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 stretch = true
-script = ExtResource("1_iaato")
+script = ExtResource("1_wk8g0")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
@@ -20,4 +20,4 @@ msaa_2d = 1
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="FancyDate2DScene" parent="SubViewport" instance=ExtResource("1_ynoq6")]
+[node name="FancyDate2DScene" parent="SubViewport" instance=ExtResource("2_3yf28")]

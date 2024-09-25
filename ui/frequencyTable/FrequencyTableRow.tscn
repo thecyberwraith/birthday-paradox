@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0ny24d06y8fp"]
 
-[ext_resource type="Script" path="res://ui/frequency_row.gd" id="1_vr2ro"]
+[ext_resource type="Script" path="res://ui/frequencyTable/FrequencyTableRow.gd" id="1_vr2ro"]
 
 [node name="Container" type="PanelContainer"]
 anchors_preset = 15
