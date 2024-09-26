@@ -9,12 +9,21 @@ var days: Array[Day] = []
 @onready var frequencyTable: FrequencyTable = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/ScrollContainer/FrequencyTable
 @onready var fancyDisplay: FancyDateDisplay = $PanelContainer/HSplitContainer/FancyDateDisplay
 
+@onready var dataMenu: PopupMenu = $PanelContainer/MenuBar/Data
+
+enum DataMenuItems {Load=0, Save=1}
+
 signal new_day_set_found
 signal new_day_added
 
 func _ready() -> void:
 	month_option.item_selected.connect(_month_selected)
 	add_button.pressed.connect(_day_added)
+	
+	for menuItem in DataMenuItems.keys():
+		dataMenu.add_item(menuItem, DataMenuItems[menuItem])
+	
+	dataMenu.id_pressed.connect(on_data_menu_item_pressed)
 	
 	var consumers = [frequencyTable, fancyDisplay]
 	
@@ -61,3 +70,9 @@ func _create_day_decomposition():
 		)
 	
 	return [ordered_days, day_counts]
+
+func on_data_menu_item_pressed(id: int):
+	if id == DataMenuItems.Load:
+		print('Loading from data...')
+	elif id == DataMenuItems.Save:
+		print('Saving to data...')
