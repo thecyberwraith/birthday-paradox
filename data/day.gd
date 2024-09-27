@@ -17,3 +17,14 @@ func _init(p_month=Month.new("January", "JAN", 31, 1), p_day=1):
 
 func _to_string() -> String:
 	return "%s %s" % [month.name, day]
+
+static func from_ordinal(ordinal: int) -> Day:
+	assert(ordinal > 0 and ordinal <= CALENDAR.DAYS_IN_YEAR)
+	var month = null
+	for m in CALENDAR.Months:
+		month = m
+		if ordinal <= m.max_days:
+			break
+		ordinal -= m.max_days
+	
+	return Day.new(month, ordinal)
