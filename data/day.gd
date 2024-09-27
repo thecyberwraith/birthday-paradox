@@ -20,11 +20,11 @@ func _to_string() -> String:
 
 static func from_ordinal(ordinal: int) -> Day:
 	assert(ordinal > 0 and ordinal <= CALENDAR.DAYS_IN_YEAR)
-	var month = null
+	var new_month = null
 	for m in CALENDAR.Months:
-		month = m
+		new_month = m
 		if ordinal <= m.max_days:
 			break
 		ordinal -= m.max_days
 	
-	return Day.new(month, ordinal)
+	return Day.new(new_month, ordinal)
