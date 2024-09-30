@@ -21,7 +21,7 @@ func _ready() -> void:
 		sorted_days.append(d)
 	
 	sorted_days.sort_custom(func (x,y):
-		return CALENDAR.day_to_ordinal(x) < CALENDAR.day_to_ordinal(y)
+		return Calendar.day_to_ordinal(x) < Calendar.day_to_ordinal(y)
 	)
 	for day in sorted_days:
 		var day_label = Label.new()

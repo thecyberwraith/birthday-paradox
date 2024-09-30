@@ -105,7 +105,7 @@ func _save_dataset_to_file(filename: String) -> void:
 	var file: FileAccess = FileAccess.open(DATASET_DIR + filename, FileAccess.WRITE)
 	file.store_8(VERSION)
 	for day in days_list:
-		var ordinal = CALENDAR.day_to_ordinal(day)
+		var ordinal = Calendar.day_to_ordinal(day)
 		file.store_8(ordinal)
 	print('Data saved with version %s to file %s' % [VERSION, DATASET_DIR + filename])
 

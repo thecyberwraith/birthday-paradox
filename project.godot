@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-CALENDAR="*res://data/CALENDAR.gd"
-STORAGE="*res://data/STORAGE.gd"
+Calendar="*res://data/Calendar.gd"
+Storage="*res://data/Storage.gd"
 
 [rendering]
 

@@ -19,9 +19,9 @@ func _to_string() -> String:
 	return "%s %s" % [month.name, day]
 
 static func from_ordinal(ordinal: int) -> Day:
-	assert(ordinal > 0 and ordinal <= CALENDAR.DAYS_IN_YEAR)
+	assert(ordinal > 0 and ordinal <= Calendar.DAYS_IN_YEAR)
 	var new_month = null
-	for m in CALENDAR.Months:
+	for m in Calendar.Months:
 		new_month = m
 		if ordinal <= m.max_days:
 			break

@@ -16,8 +16,8 @@ const RPM = 2.0
 @export var day_gradient: Gradient
 
 func _ready() -> void:
-	STORAGE.new_day_added.connect(populate_day_rays)
-	STORAGE.repopulate_data.connect(populate_day_rays)
+	Storage.new_day_added.connect(populate_day_rays)
+	Storage.repopulate_data.connect(populate_day_rays)
 
 func _process(delta):
 	rotate(delta * RPM / 60 * 2*PI)
@@ -34,15 +34,15 @@ func populate_day_rays(_unused, new_days: Array[Day], counts):
 		return
 		
 	var min_diff: int = _get_min_difference_between_days(new_days)
-	var ANGLE: float = min(PI/8, 2*PI*(min_diff*1.0/CALENDAR.DAYS_IN_YEAR))
+	var ANGLE: float = min(PI/8, 2*PI*(min_diff*1.0/Calendar.DAYS_IN_YEAR))
 		
 	var max_frequency = counts[new_days[0]._to_string()]
 		
 	for day in new_days:
 		var length = 1.0 * counts[day._to_string()] / max_frequency * RAY_LENGTH_MAX
 		var ray: RadialCalendarDayRay = RadialCalendarDayRay.new(ANGLE, RAY_LENGTH_MIN, length)
-		ray.color = day_gradient.sample(CALENDAR.day_to_float(day))
-		var angle = 2*PI*CALENDAR.day_to_float(day)
+		ray.color = day_gradient.sample(Calendar.day_to_float(day))
+		var angle = 2*PI*Calendar.day_to_float(day)
 		ray.rotate(angle)
 		ray.translate(Vector2.from_angle(angle) * RAY_LENGTH_MIN)
 
@@ -56,17 +56,17 @@ func _get_min_difference_between_days(new_days: Array[Day]) -> int:
 	
 	var day_ords = []
 	for day: Day in day_set.keys():
-		day_ords.push_back(CALENDAR.day_to_ordinal(day))
+		day_ords.push_back(Calendar.day_to_ordinal(day))
 	
 	day_ords.sort()
 	
-	var min_diff: int = CALENDAR.DAYS_IN_YEAR
+	var min_diff: int = Calendar.DAYS_IN_YEAR
 	for i in day_ords.size():
-		var diff: int = wrapi(day_ords[wrapi(i+1,0,day_ords.size())] - day_ords[i],0,CALENDAR.DAYS_IN_YEAR)
+		var diff: int = wrapi(day_ords[wrapi(i+1,0,day_ords.size())] - day_ords[i],0,Calendar.DAYS_IN_YEAR)
 		if diff < min_diff:
 			min_diff = diff
 	
 	if day_set.size() == 1:
-		min_diff = CALENDAR.DAYS_IN_YEAR
+		min_diff = Calendar.DAYS_IN_YEAR
 	
 	return min_diff
