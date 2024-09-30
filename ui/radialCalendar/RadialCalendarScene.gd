@@ -41,8 +41,8 @@ func populate_day_rays(_unused, new_days: Array[Day], counts):
 	for day in new_days:
 		var length = 1.0 * counts[day._to_string()] / max_frequency * RAY_LENGTH_MAX
 		var ray: RadialCalendarDayRay = RadialCalendarDayRay.new(ANGLE, RAY_LENGTH_MIN, length)
-		ray.color = day_gradient.sample(Calendar.day_to_float(day))
-		var angle = 2*PI*Calendar.day_to_float(day)
+		ray.color = day_gradient.sample(day.to_float())
+		var angle = 2*PI*day.to_float()
 		ray.rotate(angle)
 		ray.translate(Vector2.from_angle(angle) * RAY_LENGTH_MIN)
 
@@ -56,7 +56,7 @@ func _get_min_difference_between_days(new_days: Array[Day]) -> int:
 	
 	var day_ords = []
 	for day: Day in day_set.keys():
-		day_ords.push_back(Calendar.day_to_ordinal(day))
+		day_ords.push_back(day.to_ordinal())
 	
 	day_ords.sort()
 	
