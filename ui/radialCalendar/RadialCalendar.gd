@@ -11,6 +11,3 @@ func _ready() -> void:
 	set_diameter.call()
 	
 	connect("resized", set_diameter)
-
-func populate_days(days, counts) -> void:
-	dateScene.populate_day_rays(days, counts)

@@ -3,17 +3,44 @@ extends Node
 const DATASET_DIR = "user://datasets/"
 const NEW_SAVE_ID = 0
 
-signal repopulate_data(day_list: Array[Day])
-signal new_day_added(day: Day)
+## Called when new data is provided to completely replace the old data.
+signal repopulate_data(day_list: Array[Day], sorted_days: Array[Day], frequencies: Dictionary)
+
+## Called when a single new day is added.
+signal new_day_added(day: Day, sorted_days: Array[Day], frequencies: Dictionary)
 
 var window_scene: PackedScene = preload("res://ui/popups/ChooseSaveFileNameWindow.tscn")
 
-## Read Only
+## External Read Only
 var days_list: Array[Day] = []
+
+## Returns the unique days in an array, and a dictionary from days to counts.
+## The unique days are ordered from most frequent to least.
+func _create_day_frequency_and_sort():
+	var day_counts: Dictionary = Dictionary()
+	var ordered_days: Array[Day] = []
+	
+	for day in days_list:
+		var key = day._to_string()
+		
+		if not key in day_counts:
+			day_counts[key] = 0
+			ordered_days.append(day)
+		
+		day_counts[key] += 1
+	
+	ordered_days.sort_custom(func freqSort(x,y):
+		if day_counts[x.to_string()] > day_counts[y._to_string()]:
+			return true
+		return false
+		)
+	
+	return [ordered_days, day_counts]
 
 func add_day_to_dataset(day: Day):
 	days_list.append(day)
-	new_day_added.emit(day)
+	var aggregate = _create_day_frequency_and_sort()
+	new_day_added.emit(day, aggregate[0], aggregate[1])
 
 func load_dataset_names() -> Array[String]:
 	if not DirAccess.dir_exists_absolute(DATASET_DIR):
@@ -54,6 +81,8 @@ func populate_menu(menu: PopupMenu) -> void:
 
 func _reset_data(_idx: int) -> void:
 	print('Resetting the data.')
+	days_list = []
+	repopulate_data.emit(days_list, days_list, Dictionary())
 
 func _load_dataset_by_index(idx: int) -> void:
 	_load_dataset_from_file(load_dataset_names()[idx])
@@ -77,7 +106,6 @@ func _save_dataset_to_file(filename: String) -> void:
 	file.store_8(VERSION)
 	for day in days_list:
 		var ordinal = CALENDAR.day_to_ordinal(day)
-		print('Setting day ', ordinal)
 		file.store_8(ordinal)
 	print('Data saved with version %s to file %s' % [VERSION, DATASET_DIR + filename])
 
@@ -89,7 +117,7 @@ func _load_dataset_from_file(filename: String) -> void:
 	
 	while file.get_position() < file.get_length():
 		var ordinal = file.get_8()
-		print('Getting day ', ordinal)
 		days_list.append(Day.from_ordinal(ordinal))
-
-	repopulate_data.emit(days_list)
+	
+	var aggregate = _create_day_frequency_and_sort()
+	repopulate_data.emit(days_list, aggregate[0], aggregate[1])

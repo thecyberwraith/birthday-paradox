@@ -4,7 +4,11 @@ class_name FrequencyTable
 
 const freqRowTemplate = preload("res://ui/frequencyTable/FrequencyTableRow.tscn")
 
-func populate_days(days: Array[Day], counts: Dictionary) -> void:
+func _ready() -> void:
+	STORAGE.new_day_added.connect(populate_days)
+	STORAGE.repopulate_data.connect(populate_days)
+
+func populate_days(_unused, days: Array[Day], counts: Dictionary) -> void:
 	for child in get_children():
 		child.queue_free()
 	

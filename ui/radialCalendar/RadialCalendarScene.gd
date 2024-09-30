@@ -15,6 +15,10 @@ const RPM = 2.0
 
 @export var day_gradient: Gradient
 
+func _ready() -> void:
+	STORAGE.new_day_added.connect(populate_day_rays)
+	STORAGE.repopulate_data.connect(populate_day_rays)
+
 func _process(delta):
 	rotate(delta * RPM / 60 * 2*PI)
 
@@ -22,7 +26,7 @@ func on_diameter_change(diameter: int) -> void:
 	scale = Vector2(1,1) * (diameter * 1.0 / RESOLUTION)
 
 ## Takes an iterable of days and produces a ray for each.
-func populate_day_rays(new_days: Array[Day], counts):
+func populate_day_rays(_unused, new_days: Array[Day], counts):
 	for child in days.get_children():
 		child.queue_free()
 		
