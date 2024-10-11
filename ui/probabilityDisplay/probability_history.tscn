@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpo3fsvf21nwq"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
