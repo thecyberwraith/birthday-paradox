@@ -5,12 +5,13 @@ extends Control
 @onready var add_button: Button = $PanelContainer/HSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/AddNewDayButton
 
 @onready var data_menu: PopupMenu = $PanelContainer/MenuBar/Data
+@onready var edit_menu: PopupMenu = $PanelContainer/MenuBar/Edit
 
 func _ready() -> void:
 	month_option.item_selected.connect(_month_selected)
 	add_button.pressed.connect(_day_added)
 	
-	Storage.populate_menu(data_menu)
+	Storage.populate_menu(data_menu, edit_menu)
 	
 	for i in Calendar.Months.size():
 		month_option.add_item(Calendar.Months[i].name, i)

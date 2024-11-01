@@ -31,17 +31,47 @@ func _repopulate_data(_unused, sorted_days: Array[Day], frequencies: Dictionary)
 	
 	var max_collisions_present: int = frequencies.values().max()
 	
-	theoretical_label.text = "Uniform probability of %s collisions in %s choices" % [
-		max_collisions_present,
-		sorted_days.size()
-	]
+	_update_stored_probability(max_collisions_present+1, sorted_days.size()+1)
 	
-	empirical_label.text = "Probability of collision with x others:"
+	empirical_label.text = "Probability next collides with x others:"
 	
 	for i in range(max_collisions_present+1):
 		empirical_container.add_child(_create_empirical_probability(i, frequencies))
 
-func _create_empirical_probability(collisions: int, _frequencies: Dictionary) -> RichTextLabel:
-	var label := RichTextLabel.new()
-	label.text = "%s shared %s" % [collisions, "?"]
+func _update_stored_probability(collisions: int, samples: int) -> void:
+	var probability = "No data"
+	var key = "%s" % collisions
+	if key in probabilities["colliding"]:
+		var data = probabilities["colliding"][key]
+
+		if samples < collisions:
+			probability = "0 %"
+		elif samples < data["start"]:
+			probability = "~0 %"
+		elif (samples > data["start"] + data["probabilities"].size()):
+			if data["probabilities"][-1] > 99.99:
+				probability = ">99.9999%"
+			else:
+				probability = "?"
+		else:
+			probability = ("%s" % data["probabilities"][samples-data["start"]]) + " %"
+	
+	theoretical_label.text = "Uniform probability next is %s colliding in %s choices: %s" % [
+		collisions,
+		samples,
+		probability
+	]
+
+func _create_empirical_probability(collisions: int, frequencies: Dictionary) -> Label:
+	var label := Label.new()
+	var options := 0
+	for day in frequencies:
+		if frequencies[day] == collisions:
+			options += 1
+	
+	if collisions == 0:
+		options = Calendar.DAYS_IN_YEAR - frequencies.size()
+
+	label.text = "[x=%s has %s]" % [collisions, options]
+	print("Option ", label.text)
 	return label

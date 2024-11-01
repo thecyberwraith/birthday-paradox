@@ -54,7 +54,26 @@ func load_dataset_names() -> Array[String]:
 	
 	return names
 
-func populate_menu(menu: PopupMenu) -> void:
+func populate_menu(data_menu: PopupMenu, edit_menu: PopupMenu) -> void:
+	populate_data_menu(data_menu)
+	populate_edit_menu(edit_menu)
+
+func populate_edit_menu(menu: PopupMenu) -> void:
+	menu.add_item("Remove last date")
+	menu.id_pressed.connect(func (_x): _undo_last_date())
+
+func _undo_last_date() -> void:
+	if days_list.size() == 0:
+		return
+	
+	print("Removed last date ", days_list.pop_back())
+	send_repopulate_signal()
+
+func send_repopulate_signal() -> void:
+	var aggregate = _create_day_frequency_and_sort()
+	repopulate_data.emit(days_list, aggregate[0], aggregate[1])
+
+func populate_data_menu(menu: PopupMenu) -> void:
 	var filenames = load_dataset_names()
 	
 	menu.add_item("New", NEW_SAVE_ID)
@@ -119,5 +138,4 @@ func _load_dataset_from_file(filename: String) -> void:
 		var ordinal = file.get_8()
 		days_list.append(Day.from_ordinal(ordinal))
 	
-	var aggregate = _create_day_frequency_and_sort()
-	repopulate_data.emit(days_list, aggregate[0], aggregate[1])
+	send_repopulate_signal()
