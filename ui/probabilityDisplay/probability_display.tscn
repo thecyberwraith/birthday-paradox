@@ -2,22 +2,24 @@
 
 [ext_resource type="Script" path="res://ui/probabilityDisplay/probability_display.gd" id="1_jvfdk"]
 
-[node name="ProbabilityDisplay" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ProbabilityDisplay" type="PanelContainer"]
+offset_right = 263.0
+offset_bottom = 54.0
 script = ExtResource("1_jvfdk")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="empirical_label" type="Label" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Waiting for data..."
+
+[node name="empirical_container" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="theoretical_label" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Waiting for data..."
